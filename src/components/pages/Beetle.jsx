@@ -64,6 +64,7 @@ export default function ProductList({ cart, setCart }) {
   const [modal, setModal] = useState(false)
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
+  const [phone, setPhone] = useState('')
 
   const couponColors = ['red', 'green', 'black', 'blue', 'cyan'];
 
@@ -128,7 +129,7 @@ export default function ProductList({ cart, setCart }) {
     // reset ช้อมูล
     setName('')
     setAddress('')
-
+    setPhone('')
 
 
 
@@ -268,9 +269,14 @@ export default function ProductList({ cart, setCart }) {
               setAddress(e.target.value)
             }} className='w-full h-[40px] mt-[5px]'></input>
           </div>
-
+          <div className='mt-[10px]'>
+            <p className='font-[medium]'>เบอร์โทร</p>
+            <input onChange={(e) => {
+              setPhone(e.target.value)
+            }} className='w-full h-[40px] mt-[5px]'></input>
+          </div>
           <div onClick={() => {
-            if (name && address) {
+            if (name && address && phone) {
               ordered(cart)
 
             }

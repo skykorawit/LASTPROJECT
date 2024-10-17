@@ -13,9 +13,9 @@ const Order = () => {
     let orders = JSON.parse(localStorage.getItem("orders"))
 
     if (orders && orders.length > 0) {
-      console.log(orders)
+      console.log(orders);
 
-      setMyOrders(orders)
+      setMyOrders(orders);
     }
 
   }, [])
@@ -26,32 +26,39 @@ const Order = () => {
 
 
       <div className='grid grid-cols-3 gap-[20px] max-[1200px]:grid-cols-2 max-[700px]:grid-cols-1'>
-        {myOrders && myOrders.length > 0 ? myOrders.map((order, index) => {
+      {myOrders && myOrders.length > 0 ? myOrders.map((order, index) => {
+  
+  let cart = JSON.parse(order.cart);
+  
+  let total = cart.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
+  }, 0);
 
-          let cart = JSON.parse(order.cart)
+  return (
+    <div key={index}>
+      <p className='font-[bold]'>ออเดอร์ที่ : {index}</p>
+      <p className='font-[medium]'>ชื่อผู้รับ {order.username}</p>
+      <p className='font-[medium]'>ที่อยู่ {order.address}</p>
+      <p className='font-[medium]'>เบอร์โทร 0622544155{order.phone}</p>
+      
 
-          let total = cart.reduce((sum, item) => {
-            return sum + (item.price * item.quantity)
-          }, 0)
+      {cart && cart.length > 0 ? cart.map((item, idx) => {
+        return (
+          <div key={idx} className='font-[light]'>
+            <p>{item.name} x {item.quantity} = {item.price.toLocaleString('TH-th')} บาท</p>
+          </div>
+        );
+      }) : null}
 
-          return (
-            <div>
-              <p className='font-[bold]'>ออเดอร์ที่ : {index}</p>
-              <p className='font-[medium]'>ชื่อผู้รับ {order.username}</p>
-              <p className='font-[medium]'>ที่อยู่ {order.address}</p>
-              {cart && cart.length > 0 ? cart.map((item) => {
-                return (
-                  <div className='font-[light]'>
-                    <p>{item.name} x {item.quantity} = {item.price.toLocaleString('TH-th')} บาท</p>
-                  </div>
-                )
-              }) : null}
-              <p className='font-[medium]'>ค่าจัดส่ง {fee}</p>
-              {order.discount <= 0 ? null : <p className='font-[medium]'>ส่วนลด {order.discount.toLocaleString('TH-th')}</p>}
-              <p className='font-[medium]'>ยอดรวมทั้งสิ้น {((total + fee) - order.discount).toLocaleString('TH-th')}</p>
-            </div>
-          )
-        }) : null}
+      <p className='font-[medium]'>ค่าจัดส่ง {fee}</p>
+      {order.discount > 0 && (
+        <p className='font-[medium]'>ส่วนลด {order.discount.toLocaleString('TH-th')}</p>
+      )}
+      <p className='font-[medium]'>ยอดรวมทั้งสิ้น {((total + fee) - order.discount).toLocaleString('TH-th')}</p>
+    </div>
+  );
+}) : null}
+
       </div>
 
       {/* <div className='grid grid-cols-3 gap-[20px]'>
