@@ -17,7 +17,7 @@ const DropdownLinks = [
   { id: 1, name: "🔜Beetles Coming Soon", link: "/trending-products" }, // เปลี่ยนชื่อที่นี่
   { id: 2, name: "🛒ShopBeetle", link: "/best-selling" }, // เปลี่ยนชื่อที่นี่
   { id: 3, name: "🎮Beetle Feeding Game", link: "/top-rated" },
-  { id: 4, name: "≡Order List", link: "/Order" },
+  { id: 4, name: "Order List", link: "/Order" },
 ];
 
 const Navbar = ({ handleOrderPopup, cart }) => {
@@ -72,7 +72,7 @@ const Navbar = ({ handleOrderPopup, cart }) => {
           {/* Dropdown Links */}
           <li className="group relative cursor-pointer">
             <span className="font-bold flex items-center gap-[2px] py-2">
-              Other
+            🛒Other
               <FaCaretDown className="transition-all duration-200 group-hover:rotate-180" />
             </span>
             <div className="absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md">
